@@ -1,26 +1,307 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --mat: #e8ede3;
+  --paper: #fdfdf9;
+  --charcoal: #2b2b26;
+  --soft-ink: #5f5e5a;
+  --coral: #e8593c;
+  --deep-coral: #b6391f;
+  --cobalt: #2d5fe0;
+  --amber: #f2a623;
+  --shadow: 43 43 38;
+  --background: var(--mat);
+  --foreground: var(--charcoal);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--cobalt);
+  outline-offset: 5px;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--charcoal);
+}
+
+.mat-shell {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgb(253 253 249 / 0.82), transparent 32rem),
+    linear-gradient(rgb(43 43 38 / 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(43 43 38 / 0.055) 1px, transparent 1px),
+    var(--mat);
+  background-size: auto, 44px 44px, 44px 44px, auto;
+}
+
+.skip-link {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 50;
+  transform: translateY(-140%);
+  border-radius: 999px;
+  background: var(--cobalt);
+  color: white;
+  padding: 0.8rem 1rem;
+  font-weight: 700;
+  transition: transform 180ms ease;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.display-type {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+}
+
+.mono-type {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.85rem 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.button-primary {
+  background: var(--deep-coral);
+  box-shadow: 0 12px 22px rgb(var(--shadow) / 0.16);
+  color: white;
+}
+
+.button-secondary {
+  border: 2px solid rgb(43 43 38 / 0.16);
+  background: rgb(253 253 249 / 0.72);
+  color: var(--charcoal);
+}
+
+.button-primary:hover,
+.button-secondary:hover,
+.button-primary:focus-visible,
+.button-secondary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px rgb(var(--shadow) / 0.2);
+}
+
+.workbench-card {
+  border: 1px solid rgb(43 43 38 / 0.1);
+  border-radius: 2rem;
+  background: rgb(253 253 249 / 0.76);
+  box-shadow: 0 24px 60px rgb(var(--shadow) / 0.14);
+  backdrop-filter: blur(16px);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  background: var(--amber);
+  color: var(--charcoal);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.38rem 0.65rem;
+}
+
+.sticker-card {
+  --sticker-accent: var(--coral);
+  position: relative;
+  isolation: isolate;
+  min-height: 100%;
+  rotate: var(--sticker-rotation, 0deg);
+  transition:
+    rotate 180ms ease,
+    transform 180ms ease;
+}
+
+.sticker-card:hover,
+.sticker-card:focus-within {
+  rotate: 0deg;
+  transform: translateY(-0.35rem);
+}
+
+.sticker-card__surface {
+  position: relative;
+  overflow: clip;
+  min-height: 23rem;
+  border: 2px solid rgb(43 43 38 / 0.12);
+  border-radius: 1.8rem;
+  background:
+    radial-gradient(circle at 20% 18%, rgb(255 255 255 / 0.78), transparent 8rem),
+    var(--paper);
+  box-shadow:
+    0 1.5rem 2.7rem rgb(var(--shadow) / 0.16),
+    inset 0 0 0 0.5rem white;
+  padding: 1.35rem 1.1rem 1.5rem;
+}
+
+.sticker-card__surface::before {
+  position: absolute;
+  inset: 0.65rem;
+  z-index: -1;
+  border-radius: 1.25rem;
+  border: 2px dashed color-mix(in srgb, var(--sticker-accent) 50%, white);
+  content: "";
+  opacity: 0.42;
+}
+
+.sticker-card__link {
+  display: flex;
+  min-height: 20rem;
+  flex-direction: column;
+  justify-content: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.sticker-card__art {
+  display: grid;
+  min-height: 8rem;
+  place-items: center;
+  padding-top: 0.5rem;
+}
+
+.sticker-card__icon {
+  display: grid;
+  width: 6rem;
+  height: 6rem;
+  place-items: center;
+  border: 0.45rem solid white;
+  background:
+    radial-gradient(circle at 35% 28%, rgb(255 255 255 / 0.84), transparent 1.9rem),
+    var(--sticker-accent);
+  box-shadow: 0 1rem 1.6rem rgb(var(--shadow) / 0.16);
+  color: white;
+  font-size: 2rem;
+}
+
+.sticker-card__peel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 3;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-bottom-left-radius: 1.35rem;
+  background:
+    linear-gradient(135deg, rgb(43 43 38 / 0.24), transparent 32%),
+    linear-gradient(135deg, #fff4c8 0 48%, var(--paper) 49% 100%);
+  box-shadow: -0.35rem 0.45rem 0.75rem rgb(var(--shadow) / 0.16);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  pointer-events: none;
+  opacity: 0.9;
+  transform: scale(0.82);
+  transform-origin: top right;
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.sticker-card__peel::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 44%, rgb(43 43 38 / 0.22) 48%, transparent 54%);
+  content: "";
+}
+
+.sticker-card:hover .sticker-card__peel,
+.sticker-card:focus-within .sticker-card__peel {
+  box-shadow: -1rem 1rem 1.3rem rgb(var(--shadow) / 0.26);
+  opacity: 1;
+  transform: translate(-0.7rem, 0.7rem) rotate(22deg) scale(1.08);
+}
+
+.shape-blob,
+.shape-blob::before {
+  border-radius: 38% 62% 52% 48% / 44% 36% 64% 56%;
+}
+
+.shape-ticket,
+.shape-ticket::before {
+  border-radius: 1.4rem 3rem 1.4rem 3rem;
+}
+
+.shape-oval,
+.shape-oval::before {
+  border-radius: 47% 53% 45% 55% / 53% 46% 54% 47%;
+}
+
+.sticker-card__icon.shape-burst {
+  clip-path: polygon(
+    50% 0%,
+    60% 17%,
+    79% 8%,
+    83% 29%,
+    100% 39%,
+    85% 53%,
+    92% 75%,
+    69% 76%,
+    59% 100%,
+    43% 81%,
+    22% 92%,
+    20% 68%,
+    0% 57%,
+    17% 42%,
+    9% 20%,
+    32% 21%
+  );
+}
+
+.sticker-card__icon.shape-burst::before {
+  clip-path: inherit;
+}
+
+.status-panel {
+  position: relative;
+  border-radius: 2rem;
+  background: var(--paper);
+  box-shadow: 0 24px 60px rgb(var(--shadow) / 0.16);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
