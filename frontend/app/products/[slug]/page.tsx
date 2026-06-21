@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
+import { StickerPeel } from "@/components/StickerPeel";
 import { getProduct, products } from "@/lib/products";
 
 type ProductPageProps = {
@@ -74,14 +75,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
             }
           >
             <div className="sticker-card__surface min-h-[28rem]">
-              <span aria-hidden="true" className="sticker-card__peel" />
               <div className="grid min-h-[24rem] place-items-center">
-                <div
-                  aria-hidden="true"
-                  className={`sticker-card__icon shape-${product.shape} h-44 w-44 text-6xl`}
-                >
-                  {product.sku.slice(-1)}
-                </div>
+                <StickerPeel peelBackHoverPct={30} peelDirection={0}>
+                  <div
+                    aria-hidden="true"
+                    className={`sticker-card__icon shape-${product.shape} h-44 w-44 text-6xl`}
+                  >
+                    {product.sku.slice(-1)}
+                  </div>
+                </StickerPeel>
               </div>
             </div>
           </div>

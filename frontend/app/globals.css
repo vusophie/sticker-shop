@@ -156,6 +156,17 @@ a {
   transform: translateY(-0.35rem);
 }
 
+.sticker-card[data-releasing="true"] {
+  rotate: 0deg;
+  transform: translateY(-0.8rem) scale(0.985);
+}
+
+.sticker-card[data-releasing="true"] .sticker-card__surface {
+  box-shadow:
+    0 2rem 3.5rem rgb(var(--shadow) / 0.12),
+    inset 0 0 0 0.5rem white;
+}
+
 .sticker-card__surface {
   position: relative;
   overflow: clip;
@@ -209,43 +220,6 @@ a {
   box-shadow: 0 1rem 1.6rem rgb(var(--shadow) / 0.16);
   color: white;
   font-size: 2rem;
-}
-
-.sticker-card__peel {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 3;
-  width: 4.8rem;
-  height: 4.8rem;
-  border-bottom-left-radius: 1.35rem;
-  background:
-    linear-gradient(135deg, rgb(43 43 38 / 0.24), transparent 32%),
-    linear-gradient(135deg, #fff4c8 0 48%, var(--paper) 49% 100%);
-  box-shadow: -0.35rem 0.45rem 0.75rem rgb(var(--shadow) / 0.16);
-  clip-path: polygon(100% 0, 0 0, 100% 100%);
-  pointer-events: none;
-  opacity: 0.9;
-  transform: scale(0.82);
-  transform-origin: top right;
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.sticker-card__peel::after {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 44%, rgb(43 43 38 / 0.22) 48%, transparent 54%);
-  content: "";
-}
-
-.sticker-card:hover .sticker-card__peel,
-.sticker-card:focus-within .sticker-card__peel {
-  box-shadow: -1rem 1rem 1.3rem rgb(var(--shadow) / 0.26);
-  opacity: 1;
-  transform: translate(-0.7rem, 0.7rem) rotate(22deg) scale(1.08);
 }
 
 .shape-blob,

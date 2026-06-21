@@ -1,50 +1,6 @@
 import Link from "next/link";
-import type { CSSProperties } from "react";
-import { products, type Product } from "@/lib/products";
-
-function ProductCard({ product }: { product: Product }) {
-  return (
-    <article
-      className="sticker-card"
-      style={
-        {
-          "--sticker-accent": product.accent,
-          "--sticker-rotation": product.rotation,
-        } as CSSProperties
-      }
-    >
-      <div className="sticker-card__surface">
-        <Link className="sticker-card__link" href={`/products/${product.slug}`}>
-          <span aria-hidden="true" className="sticker-card__peel" />
-          <span className="sticker-card__art" aria-hidden="true">
-            <span className={`sticker-card__icon shape-${product.shape}`}>
-              {product.sku.slice(-1)}
-            </span>
-          </span>
-          <span className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-            <span className="flex flex-wrap items-center justify-center gap-3">
-              <span className="badge mono-type">{product.sku}</span>
-              <span className="mono-type text-lg font-bold text-[var(--soft-ink)]">
-                {product.price}
-              </span>
-            </span>
-            <span>
-              <span className="display-type block text-xl leading-tight sm:text-2xl">
-                {product.name}
-              </span>
-              <span className="mx-auto mt-2 block max-w-[14rem] text-sm leading-6 text-[var(--soft-ink)] sm:text-base">
-                {product.shortDescription}
-              </span>
-            </span>
-            <span className="mono-type text-sm font-bold text-[var(--cobalt)]">
-              Lift corner to inspect
-            </span>
-          </span>
-        </Link>
-      </div>
-    </article>
-  );
-}
+import { ProductCard } from "@/components/ProductCard";
+import { products } from "@/lib/products";
 
 export default function Home() {
   return (
