@@ -1,15 +1,10 @@
-import express = require("express");
-import dotenv = require("dotenv");
+import dotenv from "dotenv";
+import { app } from "./app";
 
 dotenv.config();
 
-const app = express();
-const port = process.env.PORT || 4000;
-
-app.get("/api/health", (req, res) => { 
-    res.json({ status: "ok" });
-});
+const port = process.env.PORT ?? 4000;
 
 app.listen(port, () => {
-    console.log(`Backend is running on http://localhost:${port}`);
+  console.log(`Backend is running on http://localhost:${port}`);
 });
